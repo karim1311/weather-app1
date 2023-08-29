@@ -1,0 +1,36 @@
+/* archivo Card.css dentro de carpeta Card dentro de carpeta components dentro de app dentro de src */
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+.main {
+    width: 26rem;
+    height: 100vh;
+    background-color: #1e213a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Raleway" serif;
+  }
+  
+  .imagen {
+    height: 40%;
+  }
+  
+  .temp {
+    font-size: 5rem;
+    color: #e7e7eb;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+  
+  .place {
+    color: #88869d;
+    font-family: Raleway;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }

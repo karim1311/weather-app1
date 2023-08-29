@@ -1,95 +1,106 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+{
+  /* archivo page.js dentro de carpeta app, dentro de carpeta src */
+}
+import React from "react";
+import Card from "../components/Card/Card";
+import Details from "../components/Details/Details";
+import Summary from "@/components/Summary/Summary";
+import { useEffect, useState } from "react";
+import "../app/globals.css";
+import "bootstrap/dist/css/bootstrap.min.css"; 
 
 export default function Home() {
+  const KEY = "8200f5153a1ec94c419b46c12f847e8f";
+  const [temperature, setTemperature] = useState();
+  const [cityName, setCityName] = useState();
+  const [weatherIcon, setWeatherIcon] = useState();
+
+
+  useEffect(() => {
+    require("bootstrap/dist/js/bootstrap.bundle.min.js");
+  }, []);
+
+  const handleCityChange = (newCity) => {
+    // Actualizamos el estado de la ciudad aquí
+    setCityName(newCity);
+    // Luego, podrías realizar la llamada a la API con la nueva ciudad
+    fetchWeatherData(newCity);
+  };
+
+
+  const handleSearchClick = () => {
+    setShowSearch(true);
+  };
+
+
+  const fetchWeatherData = (city) => {
+    const promesa = fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${KEY}&units=metric`
+    );
+    Promise.all([promesa]).then(async (values) => {
+      const data = await values[0].json();
+      setTemperature(Math.round(data?.main?.temp));
+      setCityName(data?.name);
+      setWeatherIcon(data?.weather?.[0]?.icon);
+    });
+  };
+
+  useEffect(() => {
+    fetchWeatherData("Pueblo Nuevo"); // Load default data when the page loads
+  }, []);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className="main-container">
+      <Card
+        temperature={temperature}
+        cityName={cityName}
+        weatherIcon={weatherIcon}
+        onCityChange={handleCityChange}
+      />
+      <div className="details">
+      <Summary city={cityName} />
+      <p className="text-light">Todays highlights</p>
+      <Details city={cityName} />
+      </div>
+    </div>
+  );
+}
+
+{
+  /*
+  {!showSearch ? (
+        <div className="default-view">
+          {temperature && (
+            <div className="left-column">
+              <Card
+                temperature={temperature}
+                cityName={cityName}
+                weatherIcon={weatherIcon}
+              />
+            </div>
+          )}
+          <div className="right-column">
+            {cityName && <Details city={cityName} />}
+          </div>
+          <div className="search-button">
+            <button onClick={handleSearchClick}>Search for places</button>
+          </div>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+      ) : (
+        <div className="search-container">
+          <input
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+          />
+          <button onClick={handleSearch}>Search</button>
+        </div>
+      )}
+ */
 }
