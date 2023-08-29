@@ -163,7 +163,7 @@ export default function Summary({ city }) {
   };
 
   return (
-    <div className="d-flex flex-row p-3 gap-5 h-100">
+    <div className="d-flex flex-row p-3 gap-4 h-100">
       <div className="d-flex caja p-3 flex-column align-items-center h-60">
         <p className="text-light">Tomorrow</p>
         <Image

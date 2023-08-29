@@ -23,7 +23,7 @@ export default function Details({ city }) {
   }, [city]);
 
   return (
-    <div className="d-flex details-container gap-5 h-100 w-100 p-4">
+    <div className="d-flex details-container gap-4 h-100 w-100 p-4">
       <div className="d-flex h-100 flex-wrap w-100 justify-content-center cajas">
         <div className="box">
           <p className="title">Wind status:</p>

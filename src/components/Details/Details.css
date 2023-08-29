@@ -44,7 +44,7 @@
 
   .cajas {
     display: flex;
-    gap: 4rem;
+    gap: 3rem;
   }
   
   .title {

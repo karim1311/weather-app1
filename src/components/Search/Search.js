@@ -1,6 +1,7 @@
 {/* archivo de Search. js dentro de carpeta Search dentro de carpeta components */}
 import React from 'react'
 import { useState } from 'react';
+import "../Search/Search.css"
 
 export default function Search( { onCityChange } ) {
     const [city, setCity] = useState("");
@@ -24,15 +25,14 @@ export default function Search( { onCityChange } ) {
           <button className='btn btn-secondary'>Hello</button>
 
           <div
-          className="offcanvas offcanvas-start"
+          className="offcanvas offcanvas-start fondo"
           data-bs-scroll="true"
           tabindex="-1"
           id="offcanvasWithBothOptions"
           aria-labelledby="offcanvasWithBothOptionsLabel"
           >
-          <div className="offcanvas-header">
+          <div className="offcanvas-header fondo">
             <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">
-              Backdrop with scrolling
             </h5>
             <button
               type="button"
@@ -41,7 +41,7 @@ export default function Search( { onCityChange } ) {
               aria-label="Close"
             ></button>
           </div>
-          <div className="offcanvas-body">
+          <div className="offcanvas-body fondo">
           <div className="search-container">
         <input
           type="text"
@@ -53,7 +53,7 @@ export default function Search( { onCityChange } ) {
             }
           }}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className='border-0 text-light btn-search' onClick={handleSearch}>Search</button>
       </div>
 
           </div>
